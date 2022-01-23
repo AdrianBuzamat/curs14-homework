@@ -21,7 +21,7 @@ public class QuoteService {
 
     public List<String> getQuotesForAuthor(String author) {
         List<String> result = new ArrayList<>();
-        if (author!=null){
+        if (author != null) {
             for (Quote quote : quotes) {
                 if (author.equalsIgnoreCase(quote.getAuthor())) {
                     result.add(quote.getQuote());
@@ -39,11 +39,15 @@ public class QuoteService {
         return result;
     }
 
-    public void setFavourite(int id, boolean favourite) { //validate id
-        for (Quote quote : quotes) {
-            if (quote.getId() == id) {
-                quote.setFavourite(favourite);
+    public void setFavourite(int id, boolean favourite) {
+        if (id >= 1 & id < quotes.size()) {
+            for (Quote quote : quotes) {
+                if (quote.getId() == id) {
+                    quote.setFavourite(favourite);
+                }
             }
+        } else {
+            System.out.println("Enter a number  between 1 and " + quotes.size());
         }
     }
 
