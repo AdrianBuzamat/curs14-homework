@@ -3,10 +3,12 @@ package ro.fasttrackit.curs14;
 import java.util.*;
 
 public class QuoteService {
-    private final List<Quote> quotes;
+    private final List<Quote> quotes = new ArrayList<>();
 
     public QuoteService(List<Quote> quotes) {
-        this.quotes = quotes;
+        if (quotes != null) {
+            this.quotes.addAll(quotes);
+        }
     }
 
     public List<String> getAllQuotes() {
@@ -19,9 +21,11 @@ public class QuoteService {
 
     public List<String> getQuotesForAuthor(String author) {
         List<String> result = new ArrayList<>();
-        for (Quote quote : quotes) {
-            if (author.equalsIgnoreCase(quote.getAuthor())) {
-                result.add(quote.getQuote());
+        if (author!=null){
+            for (Quote quote : quotes) {
+                if (author.equalsIgnoreCase(quote.getAuthor())) {
+                    result.add(quote.getQuote());
+                }
             }
         }
         return result;
@@ -59,7 +63,7 @@ public class QuoteService {
         int randomNr = randomGenerator.nextInt(quotes.size() - 1) + 1;
         for (Quote quote : quotes) {
             if (randomNr == quote.getId()) {
-                result = quote.getAuthor() + quote.getQuote();
+                result = quote.getId() + quote.getAuthor() + quote.getQuote();
             }
         }
         return result;
